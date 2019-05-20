@@ -239,12 +239,12 @@ void print_normal(para* p, para* q){
     q = para_next(q);}
 }
 
-void todo_list(void) {
-  printf("\nTODO: Fix '|' comparison");
-  printf("\nTODO: Normal");
-  printf("\nTODO: Context");
-  printf("\nTODO: Show unified\n");
-}
+//void todo_list(void) {
+//  printf("\nTODO: Fix '|' comparison");
+//  printf("\nTODO: Normal");
+//  printf("\nTODO: Context");
+//  printf("\nTODO: Show unified\n");
+//}
 
 
 void loadfiles(const char* filename1, const char* filename2) {
