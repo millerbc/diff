@@ -74,7 +74,6 @@ void print_normalleft(const char* left) {
 
   strcpy(buf, left);
   int j = 0, len = (int)strlen(buf) - 1;
-  //for (j = 0; j <= 48 - len ; ++j) { buf[len + j] = ' '; }
   buf[len + j++] = '\n';
   buf[len + j++] = '\0';
   printf("< %s\n", buf);
@@ -85,7 +84,6 @@ void print_normalright(const char* right) {
 
   strcpy(buf, right);
   int j = 0, len = (int)strlen(buf) - 1;
-  //for (j = 0; j <= 48 - len ; ++j) { buf[len + j] = ' '; }
   buf[len + j++] = '\n';
   buf[len + j++] = '\0';
   printf("> %s\n", buf);
