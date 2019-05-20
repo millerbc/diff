@@ -68,3 +68,25 @@ void printboth(const char* left_right) {
   buf[len - 1] = '\0';
   printf("%-50s %s", buf, left_right);
 }
+
+void print_normalleft(const char* left) {
+  char buf[BUFLEN];
+
+  strcpy(buf, left);
+  int j = 0, len = (int)strlen(buf) - 1;
+  //for (j = 0; j <= 48 - len ; ++j) { buf[len + j] = ' '; }
+  buf[len + j++] = '\n';
+  buf[len + j++] = '\0';
+  printf("< %s\n", buf);
+}
+
+void print_normalright(const char* right) {
+  char buf[BUFLEN];
+
+  strcpy(buf, right);
+  int j = 0, len = (int)strlen(buf) - 1;
+  //for (j = 0; j <= 48 - len ; ++j) { buf[len + j] = ' '; }
+  buf[len + j++] = '\n';
+  buf[len + j++] = '\0';
+  printf("> %s\n", buf);
+}

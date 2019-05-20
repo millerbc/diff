@@ -13,6 +13,8 @@ void printleftonly(const char* left);
 void printright(const char* right);
 void printrightmarked(const char* right);
 void printboth(const char* left_right);
+void print_normalleft(const char* left);
+void print_normalright(const char* right);
 
 void printline(void);
 

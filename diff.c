@@ -111,14 +111,14 @@ if(suppresscommon){
         q = para_next(q);
         qlast = q;
       }
-      int flag = 0;
-      for(int i = p->start; i <= p->stop && i != p->filesize; ++i){
-        flag = strcmp(p->base[i],q->base[i]);
-      }
-      if(flag != 0){
-        para_print(p, printleftmarked);
-        para_print(q, printrightmarked);
-      }
+      //int flag = 0;
+      //for(int i = p->start; i <= p->stop && i != p->filesize; ++i){
+        //flag = strcmp(p->base[i],q->base[i]);
+      //}
+      //if(flag != 0){
+        //para_print(p, printleftmarked);
+        //para_print(q, printrightmarked);
+      //}
       p = para_next(p);
       q = para_next(q);
     } else {
@@ -145,16 +145,16 @@ else{
         q = para_next(q);
         qlast = q;
       }
-      int flag = 0;
-      for(int i = p->start; i <= p->stop && i != p->filesize; ++i){
-        flag = strcmp(p->base[i],q->base[i]);
-      }
-      if(flag == 0)
+      //int flag = 0;
+      //for(int i = p->start; i <= p->stop && i != p->filesize; ++i){
+        //flag = strcmp(p->base[i],q->base[i]);
+      //}
+      //if(flag == 0)
       para_print(q, printboth);
-      else{
-        para_print(p, printleftmarked);
-        para_print(q, printrightmarked);
-      }
+      //else{
+      //  para_print(p, printleftmarked);
+      //  para_print(q, printrightmarked);
+      //}
       p = para_next(p);
       q = para_next(q);
     } else {
@@ -186,16 +186,7 @@ void print_leftcolumn(para* p, para* q){
         q = para_next(q);
         qlast = q;
       }
-      int flag = 0;
-      for(int i = p->start; i <= p->stop && i != p->filesize; ++i){
-        flag = strcmp(p->base[i],q->base[i]);
-      }
-      if(flag == 0)
-        para_print(q, printleftonly);
-      else{
-        para_print(p, printleftmarked);
-        para_print(q, printrightmarked);
-      }
+        para_print(p, printleftonly);
       p = para_next(p);
       q = para_next(q);
     } else {
@@ -219,7 +210,6 @@ void print_unified(para*p, para* q){
 }
 
 void print_normal(para* p, para* q){
-  para_printinfo(p, q);
   int foundmatch = 0;
 
   para* qlast = q;
@@ -233,24 +223,24 @@ void print_normal(para* p, para* q){
 
     if (foundmatch) {
       while ((foundmatch = para_equal(p, q)) == 0) {
-        para_print(q, printright);
+        para_print(q, print_normalright);
         q = para_next(q);
         qlast = q;
       }
-      para_print(q, printboth);
       p = para_next(p);
       q = para_next(q);
     } else {
-      para_print(p, printleft);
+      para_print(p, print_normalleft);
       p = para_next(p);
     }
   }
   while (q != NULL) {
-    para_print(q, printright);
+    para_print(q, print_normalright);
     q = para_next(q);}
 }
 
 void todo_list(void) {
+  printf("\nTODO: Fix '|' comparison");
   printf("\nTODO: Normal");
   printf("\nTODO: Context");
   printf("\nTODO: Show unified\n");
@@ -288,7 +278,6 @@ void showoptions(const char* file1, const char* file2) {
   print_option("diffnormal", diffnormal);
   print_option("show_version", showversion);
   print_option("show_brief", showbrief);
-  print_option("ignorecase", ignorecase);
   print_option("report_identical", report_identical);
   print_option("show_sidebyside", showsidebyside);
   print_option("show_leftcolumn", showleftcolumn);
@@ -310,7 +299,6 @@ void init_options_files(int argc, const char* argv[]) {
     const char* arg = *argv;
     setoption(arg, "-v",       "--version",                  &showversion);
     setoption(arg, "-q",       "--brief",                    &showbrief);
-    //setoption(arg, "-i",       "--ignore-case",              &ignorecase);
     setoption(arg, "-s",       "--report-identical-files",   &report_identical);
     setoption(arg, "--normal", NULL,                         &diffnormal);
     setoption(arg, "-y",       "--side-by-side",             &showsidebyside);
@@ -368,10 +356,7 @@ if(diffnormal){
 
 
 int main(int argc, const char * argv[]) {
-
-//  para_printfile(strings1, count1, printleft);
-//  para_printfile(strings2, count2, printright);
   init_options_files(--argc, ++argv);
-  todo_list();
+//  todo_list();
   return 0;
 }
