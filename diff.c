@@ -57,12 +57,12 @@ void version(void) {
   printf("Written by Brian Miller (based on the starter code by William McCarthy)\n");
 }
 
-void brief(para* p, para* q){
+void brief(para* p, para* q, const char* filename1, const char* filename2){
   para* p2 = p;
   para* q2 = q;
   while(p2 != NULL && q2 != NULL){
     if(para_equal(p2,q2) == 0){
-      printf("\nFiles differ.\n");
+      printf("Files %s and %s differ.\n", filename1, filename2);
       break;
     }
     p2 = para_next(p2);
@@ -74,7 +74,7 @@ void brief(para* p, para* q){
   free(q2);
 }
 
-void identical(para* p, para* q){
+void identical(para* p, para* q, const char* filename1, const char* filename2){
   para* p2 = p;
   para* q2 = q;
   int nogo = 0;
@@ -86,7 +86,7 @@ void identical(para* p, para* q){
     p2 = para_next(p2);
     q2 = para_next(q2);
   }
-  if(nogo == 0){printf("\nFiles are identical.\n\n");}
+  if(nogo == 0){printf("Files %s and %s are identical.\n", filename1, filename2);}
   p2 = NULL;
   q2 = NULL;
   free(p2);
@@ -324,24 +324,24 @@ void init_options_files(int argc, const char* argv[]) {
 
   para* p = para_first(strings1, count1);
   para* q = para_first(strings2, count2);
-  function_calls(p,q);
+  function_calls(p, q, files[0], files[1]);
   showoptions(files[0], files[1]);
 }
 
-void function_calls(para* p, para* q){
+void function_calls(para* p, para* q, const char* filename1, const char* filename2){
 
 
   if (showversion) { version(); }
 
-  if(showbrief) { brief(p,q);}
+  if(showbrief) { brief(p, q, filename1, filename2);}
 
-  if(report_identical) {identical(p,q);}
+  if(report_identical) {identical(p, q, filename1, filename2);}
 
-  if(showsidebyside) {print_sidebyside(p,q);}
+  if(showsidebyside) {print_sidebyside(p, q);}
 
-  if(showleftcolumn) {print_leftcolumn(p,q);}
+  if(showleftcolumn) {print_leftcolumn(p, q);}
 
-  if(showcontext) {print_context(p,q);}
+  if(showcontext) {print_context(p, q);}
 
   if (((showsidebyside || showleftcolumn) && (diffnormal || showcontext || showunified)) ||
       (showcontext && showunified) || (diffnormal && (showcontext || showunified))) {
@@ -349,7 +349,7 @@ void function_calls(para* p, para* q){
     diff_output_conflict_error();
   }
 if(diffnormal){
-  print_normal(p,q);
+  print_normal(p, q);
 }
 
 }
